@@ -1,0 +1,59 @@
+SCRIPT TO RETRIEVE INFORMATION ABOUT THE SYSTEM
+
+System Information Retrieval Script
+
+This script, written in batch language, retrieves various pieces of information about the system it's executed on. It gathers general system information, network and domain neighborhood details, domain trust information, lists installed programs for all users and the current user, and displays the process list.
+
+Instructions:
+
+Run the script in a Windows environment to gather system information.
+Note that administrative privileges may be required for some commands to retrieve certain information.
+Usage:
+
+Download or clone the repository.
+Execute the script in a Windows command prompt or PowerShell environment.
+Disclaimer:
+This script is provided as-is and without warranty. Use at your own risk.
+
+@echo off
+
+echo General Info:
+systeminfo
+
+echo.
+echo My Username:
+whoami
+
+echo.
+echo Network Neighbourghoud:
+net view /all
+
+echo.
+echo Domain Neighbourghoud:
+net view /all /domain
+
+echo.
+echo Domain Trust:
+nltest /domain_trusts /all_trusts
+
+echo.
+echo Installed Programs:
+reg query hklm\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall /v "DisplayName" /s
+
+echo.
+echo Installed Programs (wow64):
+reg query hklm\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall /v "DisplayName" /s
+
+echo.
+echo Installed Programs (current user):
+reg query hkcu\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall /v "DisplayName" /s
+
+echo.
+echo Installed Programs (current user, wow64):
+reg query hkcu\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall /v "DisplayName" /s
+
+echo.
+echo Process List:
+tasklist
+
+echo.
